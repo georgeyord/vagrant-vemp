@@ -1,0 +1,15 @@
+server {
+	include conf/init.conf;
+
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+    	listen  443 ssl;
+
+	# Make site accessible also from http://localhost/
+        server_name  _ localhost *.local.webwonder.gr;
+	root /www/default;
+
+	include conf/common.conf;
+	include conf/simple.conf;
+	include conf/php.conf;
+}
