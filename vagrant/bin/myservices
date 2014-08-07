@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# ***** DEFAULTS ***** #
+ACTION="start"
+SERVICES="nginx,mysql"
+NGINX="sudo service nginx"
+MEMCACHED="sudo service memcached"
+PHP5FPM="sudo service php5-fpm"
+MYSQL="sudo service mysql"
+NEOFJ="sudo $NEO4J_HOME/bin/neo4j"
+
+# SHOW HELP IF NO ARGUMENTS
+if [ "$1" == "" ]; then
+    echo "USAGE: $0 [ACTION] [SERVICE1,SERVICE2]"
+    echo "DEFAULTS: $ACTION $SERVICES"
+else
+    # ***** ARGUMENTS ***** #
+    ACTION="$1"
+    
+    echo "My services will $ACTION now!"  
+
+    if [ "$2" == "" ]; then  
+        $NGINX $ACTION
+        $MYSQL $ACTION
+        $NEOFJ $ACTION
+        $MEMCACHED $ACTION
+        $PHP5FPM $ACTION
+    else
+        IN="$2"
+
+        arr=$(echo $IN | tr "," "\n")
+
+        for x in $arr
+        do
+            echo "$x"
+            if [ "$x" == "nginx" ]; then
+                $NGINX $ACTION
+            fi
+            if [ "$x" == "memcached" ]; then
+                $MEMCACHED $ACTION
+            fi
+            if [ "$x" == "php5-fpm" ]; then
+                $PHP5FPM $ACTION
+            fi
+            if [ "$x" == "mysql" ]; then
+                $MYSQL $ACTION
+            fi
+            if [ "$x" == "neo" ]; then
+                $NEOFJ $ACTION
+            fi
+        done
+    fi
+fi
+
+

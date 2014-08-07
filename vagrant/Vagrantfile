@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # Every Vagrant virtual environment requires a box to build off of.
+  # Get the box from vagrantcloud.com
+  config.vm.box = "georgeyord/vemp"
+
+  # config.ssh.max_tries = 10
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  config.vm.synced_folder "../shared/www/", "/var/www/", :owner => "www-data", :group => "www-data", :mount_options => ["dmode=775","fmode=664"]
+  config.vm.synced_folder "../shared/mysql/", "/var/mysql/", owner: "mysql", group: "mysql"
+  config.vm.synced_folder "./bin/", "/home/vagrant/bin/", :mount_options => ["dmode=700","fmode=700"]
+  config.vm.synced_folder "./ssh/", "/home/vagrant/ssh/", :mount_options => ["dmode=700","fmode=600"]
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  config.vm.network :public_network
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # VirtualBox:
+  config.vm.provider :virtualbox do |vb|
+  	# Don't boot with headless mode
+  	# vb.gui = true
+  	# Use VBoxManage to customize the VM:
+  	vb.customize ["modifyvm", :id, "--name", "vemp", "--memory", "1024", "--cpus", 2, "--cpuexecutioncap", "80"]
+  end
+
+  config.vm.provision "shell", inline: "/home/vagrant/bin/myservices restart >> /vagrant/var/log/vemp.log"
+  config.vm.provision "shell", inline: "/home/vagrant/bin/myip"
+  config.vm.provision "shell", inline: "cat /etc/hosts | grep -A 1 vemphosts"
+  # config.vm.provision "shell", inline: "/home/vagrant/bin/myclarity"
+end

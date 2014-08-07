@@ -1,0 +1,10 @@
+log_files:
+ - /vagrant/var/log/php5-fpm.log
+ - /vagrant/var/log/nginx/*.log
+ - /vagrant/var/log/xdebug.log
+ - /vagrant/var/log/php5-fpm.log
+ - /var/log/mysql/error.log
+ - /home/vagrant/clarity.log 
+port: 8989
+#username: root
+#password: qwerty1

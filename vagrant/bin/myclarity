@@ -1,0 +1,3 @@
+#!/bin/bash
+
+clarity --config=/vagrant/opt/clarity/config.yml /var/log > ~/clarity.log &

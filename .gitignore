@@ -1,0 +1,32 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# cPanel
+.htaccess
+error_log
+
+# Dev tools
+nbproject/*
+.project
+.settings
+.idea
+.idea/*
+
+# Vagrant
+vagrant/.vagrant/*
+vagrant/.Vagrantfile.swp
+shared/www/*
+shared/mysql/*
+shared/.fuse*
+vagrant/var/log/*
+vagrant/etc/nginx/*
+vagrant/etc/hosts
+vagrant/ssh/*
