@@ -12,7 +12,7 @@ Start a virtual machine which can handle all your projects and manage all files 
 1. Create the directory of the project `mkdir vemp`
 1. `cd vemp`
 1. Init git `git init`
-1. Add repository `git remote add upstream git@bitbucket.org:wwforce/vemp-vagrant.git`
+1. Add repository `git remote add upstream https://github.com/georgeyord/vagrant-vemp.git`
 1. Fetch all branches `git fetch upstream`
 1. Check out master branch: checkout upstream/master -b master`
 
